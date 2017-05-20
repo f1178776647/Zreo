@@ -4,7 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/title" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/zhantai_bg"
+        android:gravity="center"
+        android:padding="7dp"
+        android:text="传感器记录"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -58,6 +58,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_daolu_no1"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/zhantai_bg"
@@ -67,6 +68,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_zhantai1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -77,6 +79,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_yanse1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -91,6 +94,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_daolu_no2"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/zhantai_bg"
@@ -100,6 +104,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_zhantai2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -110,6 +115,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_yanse2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -124,6 +130,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_daolu_no3"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/zhantai_bg"
@@ -133,6 +140,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_zhantai3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -143,6 +151,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_yanse3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -157,6 +166,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_daolu_no4"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/zhantai_bg"
@@ -166,6 +176,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_zhantai4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -176,6 +187,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_yanse4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -190,6 +202,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_daolu_no5"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/zhantai_bg"
@@ -199,6 +212,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_zhantai5"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -209,6 +223,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_daolu_yanse5"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
@@ -217,6 +232,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_daolu_caxun"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
