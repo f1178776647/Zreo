@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -52,6 +54,7 @@ public class DaoLuZhanTaiActivity extends Activity {
             Color.DKGRAY
     };
     private int[][] maps;
+    private boolean isDes = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,21 @@ public class DaoLuZhanTaiActivity extends Activity {
                 maps = new int[2][5];
             }
         });
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    isDes = true;
+                } else {
+                    isDes = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void initDatas() {
@@ -85,7 +103,7 @@ public class DaoLuZhanTaiActivity extends Activity {
             public void run() {
                 super.run();
                 String url = "http://192.168.5.15:8080/transportservice/action/GetRoadStatus.do";
-                for (int i = 0; i < 5; i++) {
+                for (int i = 1; i < 6; i++) {
                     String requestJson = "{'RoadId':" + i + ",'UserName':'Z0004'}";
                     String str = OkManager.getInstance().postSyncHttp(url, requestJson);
                     Message message = handler.obtainMessage();
@@ -102,45 +120,66 @@ public class DaoLuZhanTaiActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             String result = (String) msg.obj;
+
             Gson gson = new Gson();
             DaoLu daolu = gson.fromJson(result, DaoLu.class);
             int position = msg.what;
-            maps[1][position] = position;
-            maps[0][position] = daolu.getBalance();
-            Arrays.sort(maps[0]);
-            if (position == 4) {
-                for (int i = 0; i < 5; i++) {
-                    setDaoLuNoText(maps[1][i]);
+            int index = position - 1;
+            Log.e("json", result + position + ":" + index);
+            maps[1][index] = position;
+            maps[0][index] = daolu.getBalance();
+            for (int i = 0; i < maps[0].length - 1; i++) {
+                for (int j = 0; j < maps[0].length - i - 1; j++) {
+                    if (maps[0][j] < maps[0][j + 1]) {
+                        int num = maps[0][j];
+                        maps[0][j] = maps[0][j + 1];
+                        maps[0][j + 1] = num;
 
+                        int num2 = maps[1][j];
+                        maps[1][j] = maps[1][j + 1];
+                        maps[1][j + 1] = num2;
+                    }
+                }
+            }
+
+            if (position == 5) {
+                for (int i = 0; i < 5; i++) {
+                    setDaoLuNoText(i);
                 }
             }
         }
     };
 
+    private void setViewData() {
+        for (int i = 0; i < 5; i++) {
+            setDaoLuNoText(i);
+        }
+    }
+
     private void setDaoLuNoText(int position) {
         switch (position) {
             case 0:
-                tvDaoluNo1.setText("1号道路");
+                tvDaoluNo1.setText(maps[1][position] + "号道路");
                 tvDaoluzhantai1.setText(maps[0][position] + "");
                 tvDaoluyanse1.setBackgroundColor(yanses[maps[0][position]]);
                 break;
             case 1:
-                tvDaoluNo2.setText("2号道路");
+                tvDaoluNo2.setText(maps[1][position] + "号道路");
                 tvDaoluzhantai2.setText(maps[0][position] + "");
                 tvDaoluyanse2.setBackgroundColor(yanses[maps[0][position]]);
                 break;
             case 2:
-                tvDaoluNo3.setText("3号道路");
+                tvDaoluNo3.setText(maps[1][position] + "号道路");
                 tvDaoluzhantai3.setText(maps[0][position] + "");
                 tvDaoluyanse3.setBackgroundColor(yanses[maps[0][position]]);
                 break;
             case 3:
-                tvDaoluNo4.setText("4号道路");
+                tvDaoluNo4.setText(maps[1][position] + "号道路");
                 tvDaoluzhantai4.setText(maps[0][position] + "");
                 tvDaoluyanse4.setBackgroundColor(yanses[maps[0][position]]);
                 break;
             case 4:
-                tvDaoluNo5.setText("5号道路");
+                tvDaoluNo5.setText(maps[1][position] + "号道路");
                 tvDaoluzhantai5.setText(maps[0][position] + "");
                 tvDaoluyanse5.setBackgroundColor(yanses[maps[0][position]]);
                 break;
