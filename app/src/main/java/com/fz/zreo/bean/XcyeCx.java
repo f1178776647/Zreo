@@ -5,8 +5,6 @@ package com.fz.zreo.bean;
  */
 
 public class XcyeCx {
-
-
     private String RESULT;
     private String ERRMSG;
     private int Balance;

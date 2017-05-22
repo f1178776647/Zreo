@@ -14,13 +14,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.fz.zreo.utils.DaoLu;
+import com.fz.zreo.bean.DaoLu;
 import com.fz.zreo.utils.OkManager;
 import com.google.gson.Gson;
-
-import java.util.Arrays;
-import java.util.Map;
-import java.util.TreeMap;
 
 
 /**
