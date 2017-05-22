@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/zhantai_bg"
+        android:gravity="center"
+        android:text="账户充值"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <Button
+            android:id="@+id/btn_xccz_caxun"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:background="#1e65d7"
+            android:gravity="center"
+            android:text="查询"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spn_xccz_cxzh"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/zhantai_bg">
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/tv_xccz_cxye"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/zhantai_bg"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:hint="账户余额" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spn_xccz_czzh"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/zhantai_bg"></Spinner>
+
+        <EditText
+            android:id="@+id/et_xccz_ye"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="60dp"
+            android:background="@drawable/zhantai_bg"
+            android:gravity="center_vertical"
+            android:hint="账户余额"
+            android:textSize="20sp"
+            android:padding="3dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_xccz_cz"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:background="#1e65d7"
+        android:gravity="center"
+        android:text="充值"
+        android:textColor="#fff" />
+</LinearLayout>
