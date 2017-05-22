@@ -127,7 +127,7 @@ public class CgqsjlsActivity extends Activity {
                 super.run();
                 while (isNet) {
                     try {
-                        String url = "http://192.168.5.15:8080/transportservice/action/GetSenseByName.do";
+                        String url = "http://192.168.5.25:8080/transportservice/action/GetSenseByName.do";
                         String requestJson = "{'SenseName':'" + CgqType + "', 'UserName':'Z0004'}";
                         Log.d("dsad",requestJson);
                         String str = OkManager.getInstance().postSyncHttp(url, requestJson);

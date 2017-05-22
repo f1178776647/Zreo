@@ -8,10 +8,17 @@ import android.os.Message;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.fz.zreo.bean.Hjzb;
+import com.fz.zreo.utils.MyApplication;
+import com.fz.zreo.utils.MyVolley;
 import com.fz.zreo.utils.OkManager;
+import com.fz.zreo.utils.VolleyRespons;
 import com.fz.zreo.utils.WebResponse;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -23,13 +30,14 @@ import okhttp3.Response;
  * Created by Zero on 2017/5/18.
  */
 
-public class HjzbActivity extends Activity implements WebResponse {
+public class HjzbActivity extends Activity implements WebResponse, VolleyRespons {
     private TextView tvXd;
     private TextView tvWd;
     private TextView tvCo2;
     private TextView tvGz;
     private TextView tvPm;
     private TextView tvDlzt;
+    private MyVolley volley;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +48,31 @@ public class HjzbActivity extends Activity implements WebResponse {
     }
 
     private void setData() {
-        final String url = "http://192.168.5.15:8080/transportservice/action/GetAllSense.do";
+        final String url = "http://192.168.5.25:8080/transportservice/action/GetAllSense.do";
         final String requestJson = "{'UserName':'Z0004'}";
-        //异步
+        try {
+            final JSONObject jsonObject = new JSONObject(requestJson);
+            new Thread() {
+                @Override
+                public void run() {
+                    super.run();
+                    while (true) {
+                        MyApplication.getRequestQueue().cancelAll("postJson");
+                        volley.postJsonByJson(HjzbActivity.this, url, jsonObject, 100);
+                        try {
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }.start();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        /*//异步
         //OkManager.getInstance().postAsynHttp(HjzbActivity.this, url, requestJson);
         //同步
         new Thread() {
@@ -61,10 +91,11 @@ public class HjzbActivity extends Activity implements WebResponse {
                     }
                 }
             }
-        }.start();
+        }.start();*/
     }
 
     private void initView() {
+        volley = new MyVolley();
         tvCo2 = (TextView) findViewById(R.id.tv_co2);
         tvDlzt = (TextView) findViewById(R.id.tv_dlzt);
         tvGz = (TextView) findViewById(R.id.tv_gz);
@@ -103,4 +134,13 @@ public class HjzbActivity extends Activity implements WebResponse {
 
     }
 
+    @Override
+    public void onSuccessResponseJson(JSONObject jsonObject, int type) {
+        setViewData(jsonObject.toString());
+    }
+
+    @Override
+    public void onFailResponseJson(VolleyError error) {
+
+    }
 }

@@ -102,7 +102,7 @@ public class DaoLuZhanTaiActivity extends Activity {
             @Override
             public void run() {
                 super.run();
-                String url = "http://192.168.5.15:8080/transportservice/action/GetRoadStatus.do";
+                String url = "http://192.168.5.25:8080/transportservice/action/GetRoadStatus.do";
                 for (int i = 1; i < 6; i++) {
                     String requestJson = "{'RoadId':" + i + ",'UserName':'Z0004'}";
                     String str = OkManager.getInstance().postSyncHttp(url, requestJson);
