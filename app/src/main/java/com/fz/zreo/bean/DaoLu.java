@@ -10,7 +10,6 @@ public class DaoLu {
      * Balance : 3
      * RESULT : S
      */
-
     private String ERRMSG;
     private int Balance;
     private String RESULT;
