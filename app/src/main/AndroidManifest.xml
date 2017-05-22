@@ -53,12 +53,6 @@
 
 
         <activity
-            android:name=".CgqsjlsActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape">
-
-        </activity>
-        <activity
             android:name=".DaoLuZhanTaiActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape">

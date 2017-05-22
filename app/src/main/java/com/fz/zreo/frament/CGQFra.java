@@ -1,9 +1,10 @@
-package com.fz.zreo;
+package com.fz.zreo.frament;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.fz.zreo.R;
 import com.fz.zreo.bean.Hjzb;
 import com.fz.zreo.utils.OkManager;
 import com.google.gson.Gson;
@@ -26,10 +28,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Zero on 2017/5/18.
+ * Created by Zero on 2017/5/22.
  */
 
-public class CgqsjlsActivity extends Activity {
+public class CGQFra extends Fragment {
     private ListView mListView;
     private List<Hjzb> hjzbs;
     private MyAdapter adapter;
@@ -64,15 +66,79 @@ public class CgqsjlsActivity extends Activity {
     private Button btnCuxun;
     private Thread mThread;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.cgqsjls);
-        initDatas();
-        initView();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.cgqsjls, container, false);
+        initDatas(view);
+        initView(view);
         event();
+        return view;
     }
-
+    private void initDatas(View view) {
+        zhouqi=2000;
+        mThread = new Thread();
+        Cgq = "空气温度";
+        CgqType = "temperature";
+        positionCgq = 0;
+        cgqs = new String[][]{
+                {
+                        "temperature",
+                        "humidity",
+                        "LightIntensity",
+                        "co2",
+                        "pm2.5",
+                },
+                {
+                        "空气温度",
+                        "空气湿度",
+                        "光照强度",
+                        "二氧化碳",
+                        "Pm2.5",
+                }
+        };
+        zqs=new String[]{
+                "2/s",
+                "5/s"
+        };
+        ArrayAdapter cgqAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, cgqs[1]);
+        ArrayAdapter zqAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,zqs);
+        mSpinnerZq= (Spinner) view.findViewById(R.id.spn_cgq_zhouqi);
+        mSpinnerZq.setAdapter(zqAdapter);
+        mSpinnerCgq = (Spinner) view.findViewById(R.id.spn_cgq_type);
+        mSpinnerCgq.setAdapter(cgqAdapter);
+        hjzbs = new ArrayList<>();
+        net();
+    }
+    private void net() {
+        mThread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                while (isNet) {
+                    try {
+                        String url = "http://192.168.5.25:8080/transportservice/action/GetSenseByName.do";
+                        String requestJson = "{'SenseName':'" + CgqType + "', 'UserName':'Z0004'}";
+                        Log.d("dsad",requestJson);
+                        String str = OkManager.getInstance().postSyncHttp(url, requestJson);
+                        Message message = handler.obtainMessage();
+                        message.obj = str;
+                        handler.sendMessage(message);
+                        sleep(zhouqi);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        mThread.start();
+    }
+    private void initView(View view) {
+        mListView = (ListView) view.findViewById(R.id.lv_cgqsjls);
+        adapter = new MyAdapter();
+        mListView.setAdapter(adapter);
+        btnCuxun = (Button) view.findViewById(R.id.btn_cgq_cuxun);
+    }
     private void event() {
         mSpinnerCgq.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -119,74 +185,6 @@ public class CgqsjlsActivity extends Activity {
             }
         });
     }
-
-    private void net() {
-        mThread = new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                while (isNet) {
-                    try {
-                        String url = "http://192.168.5.25:8080/transportservice/action/GetSenseByName.do";
-                        String requestJson = "{'SenseName':'" + CgqType + "', 'UserName':'Z0004'}";
-                        Log.d("dsad",requestJson);
-                        String str = OkManager.getInstance().postSyncHttp(url, requestJson);
-                        Message message = handler.obtainMessage();
-                        message.obj = str;
-                        handler.sendMessage(message);
-                        sleep(zhouqi);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        mThread.start();
-    }
-
-    private void initDatas() {
-        zhouqi=2000;
-        mThread = new Thread();
-        Cgq = "空气温度";
-        CgqType = "temperature";
-        positionCgq = 0;
-        cgqs = new String[][]{
-                {
-                        "temperature",
-                        "humidity",
-                        "LightIntensity",
-                        "co2",
-                        "pm2.5",
-                },
-                {
-                        "空气温度",
-                        "空气湿度",
-                        "光照强度",
-                        "二氧化碳",
-                        "Pm2.5",
-                }
-        };
-        zqs=new String[]{
-          "2/s",
-                "5/s"
-        };
-        ArrayAdapter cgqAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, cgqs[1]);
-        ArrayAdapter zqAdapter=new ArrayAdapter(this,android.R.layout.simple_spinner_item,zqs);
-        mSpinnerZq= (Spinner) findViewById(R.id.spn_cgq_zhouqi);
-        mSpinnerZq.setAdapter(zqAdapter);
-        mSpinnerCgq = (Spinner) findViewById(R.id.spn_cgq_type);
-        mSpinnerCgq.setAdapter(cgqAdapter);
-        hjzbs = new ArrayList<>();
-        net();
-    }
-
-    private void initView() {
-        mListView = (ListView) findViewById(R.id.lv_cgqsjls);
-        adapter = new MyAdapter();
-        mListView.setAdapter(adapter);
-        btnCuxun = (Button) findViewById(R.id.btn_cgq_cuxun);
-    }
-
     class MyAdapter extends BaseAdapter {
 
         @Override
@@ -209,7 +207,7 @@ public class CgqsjlsActivity extends Activity {
             ViewHolder viewHolder = null;
             if (view == null) {
                 viewHolder = new ViewHolder();
-                view = LayoutInflater.from(CgqsjlsActivity.this).inflate(R.layout.cgqsjls_item, null);
+                view = LayoutInflater.from(getActivity()).inflate(R.layout.cgqsjls_item, null);
                 viewHolder.tvCgq = (TextView) view.findViewById(R.id.tv_cgq_cgq);
                 viewHolder.tvSj = (TextView) view.findViewById(R.id.tv_cgq_sj);
                 viewHolder.tvSfzc = (TextView) view.findViewById(R.id.tv_cgq_sfzc);
@@ -242,11 +240,5 @@ public class CgqsjlsActivity extends Activity {
             public TextView tvSfzc;
             public TextView tvTime;
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        isNet=false;
     }
 }
