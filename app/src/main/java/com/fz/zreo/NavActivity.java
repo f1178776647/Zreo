@@ -64,7 +64,7 @@ public class NavActivity extends Activity {
         btnNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NavActivity.this, HjzbActivity.class);
+                Intent intent = new Intent(NavActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
