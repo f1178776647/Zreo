@@ -2,12 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#2c90c9"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <ListView
+    <TextView
+        android:id="@+id/tv_leftmenu_xczhcz"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#2c90c9">
+        android:layout_height="wrap_content"
+        android:text="小车账户充值"
+        android:textColor="#fff"
+        android:textSize="20sp" />
 
-    </ListView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="环境监控"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="传感器记录"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="道路状态"
+        android:textColor="#fff"
+        android:textSize="20sp" />
 </LinearLayout>
