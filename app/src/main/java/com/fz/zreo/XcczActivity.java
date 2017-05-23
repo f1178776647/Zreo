@@ -15,7 +15,7 @@ import com.android.volley.VolleyError;
 import com.fz.zreo.bean.XcyeCx;
 import com.fz.zreo.utils.MyApplication;
 import com.fz.zreo.utils.MyVolley;
-import com.fz.zreo.utils.VolleyRespons;
+import com.fz.zreo.utils.VolleyResponse;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -28,7 +28,7 @@ import java.util.TreeMap;
  * Created by Zero on 2017/5/22.
  */
 
-public class XcczActivity extends Activity implements View.OnClickListener, VolleyRespons {
+public class XcczActivity extends Activity implements View.OnClickListener, VolleyResponse {
     public static int CHONGZHI = 100;
     public static int CAXUN = 200;
 

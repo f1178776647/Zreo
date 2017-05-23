@@ -1,6 +1,8 @@
 package com.fz.zreo.utils;
 
+import android.app.Activity;
 import android.app.DownloadManager;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -29,6 +31,7 @@ public class OkManager {
     private OkHttpClient mOkHttpClient;
     private static Handler handler;
     private static OkManager okManager;
+    private Context context;
 
     public static OkManager getInstance() {
         if (okManager == null) {
@@ -83,7 +86,6 @@ public class OkManager {
                     @Override
                     public void run() {
                         try {
-
                             webResponse.onSuccessResponse(call, str, 1);
                         } catch (IOException e) {
                             e.printStackTrace();

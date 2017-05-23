@@ -13,23 +13,22 @@ import org.json.JSONObject;
 
 public class MyVolley {
     private JsonObjectRequest request;
-    public void postJsonByJson(final VolleyRespons respons, String url,
+    public void postJsonByJson(final VolleyResponse response, String url,
                                JSONObject object, final int type) {
         request = new JsonObjectRequest(url, object,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject object) {
-                        respons.onSuccessResponseJson(object, type);
+                        response.onSuccessResponseJson(object, type);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        respons.onFailResponseJson(volleyError);
+                        response.onFailResponseJson(volleyError);
                     }
                 });
         request.setTag("postJson");
-        request.setRetryPolicy(new DefaultRetryPolicy());
         MyApplication.getRequestQueue().add(request);
     }
     public void postImgByUrl(){

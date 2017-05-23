@@ -8,7 +8,7 @@ import org.json.JSONObject;
  * Created by Zero on 2017/5/22.
  */
 
-public interface VolleyRespons {
+public interface VolleyResponse {
     public void onSuccessResponseJson(JSONObject jsonObject,int type);
 
     public void onFailResponseJson(VolleyError error);

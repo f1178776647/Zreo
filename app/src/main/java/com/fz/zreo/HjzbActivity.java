@@ -1,19 +1,16 @@
 package com.fz.zreo;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.fz.zreo.bean.Hjzb;
 import com.fz.zreo.utils.MyApplication;
 import com.fz.zreo.utils.MyVolley;
-import com.fz.zreo.utils.OkManager;
-import com.fz.zreo.utils.VolleyRespons;
+import com.fz.zreo.utils.VolleyResponse;
 import com.fz.zreo.utils.WebResponse;
 import com.google.gson.Gson;
 
@@ -23,14 +20,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 /**
  * Created by Zero on 2017/5/18.
  */
 
-public class HjzbActivity extends Activity implements WebResponse, VolleyRespons {
+public class HjzbActivity extends Activity implements WebResponse, VolleyResponse {
     private TextView tvXd;
     private TextView tvWd;
     private TextView tvCo2;

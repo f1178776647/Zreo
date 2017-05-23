@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.fz.zreo.HjzbActivity;
 import com.fz.zreo.R;
 import com.fz.zreo.bean.Hjzb;
 import com.fz.zreo.utils.MyApplication;
 import com.fz.zreo.utils.MyVolley;
-import com.fz.zreo.utils.VolleyRespons;
+import com.fz.zreo.utils.VolleyResponse;
 import com.fz.zreo.utils.WebResponse;
 import com.google.gson.Gson;
 
@@ -70,7 +69,7 @@ public class DLHJFra extends Fragment implements WebResponse {
                     super.run();
                     while (true) {
                         MyApplication.getRequestQueue().cancelAll("postJson");
-                        volley.postJsonByJson(new VolleyRespons() {
+                        volley.postJsonByJson(new VolleyResponse() {
                             @Override
                             public void onSuccessResponseJson(JSONObject jsonObject, int type) {
                                 setViewData(jsonObject.toString());

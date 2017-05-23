@@ -16,11 +16,10 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.fz.zreo.R;
-import com.fz.zreo.XcczActivity;
 import com.fz.zreo.bean.XcyeCx;
 import com.fz.zreo.utils.MyApplication;
 import com.fz.zreo.utils.MyVolley;
-import com.fz.zreo.utils.VolleyRespons;
+import com.fz.zreo.utils.VolleyResponse;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -120,7 +119,7 @@ public class XCCZFra extends Fragment implements View.OnClickListener {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                volley.postJsonByJson(new VolleyRespons() {
+                volley.postJsonByJson(new VolleyResponse() {
                     @Override
                     public void onSuccessResponseJson(JSONObject jsonObject, int type) {
                         Gson gson = new Gson();
@@ -142,7 +141,7 @@ public class XCCZFra extends Fragment implements View.OnClickListener {
                 map.put("Money", czMoney);
                 map.put("UserName", "Z0004");
                 json = new JSONObject(map);
-                volley.postJsonByJson(new VolleyRespons() {
+                volley.postJsonByJson(new VolleyResponse() {
                     @Override
                     public void onSuccessResponseJson(JSONObject jsonObject, int type) {
                         Gson gson = new Gson();
