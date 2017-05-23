@@ -30,7 +30,5 @@ public class MyVolley {
         request.setTag("postJson");
         MyApplication.getRequestQueue().add(request);
     }
-    public void postImgByUrl(){
 
-    }
 }
