@@ -1,9 +1,10 @@
 package com.fz.zreo;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,17 +13,22 @@ import android.widget.Toast;
 
 import com.fz.zreo.frament.CGQFra;
 import com.fz.zreo.frament.DLZTFra;
+import com.fz.zreo.frament.XCCZFra;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import java.util.List;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
     private long mExitTime;
     private SlidingMenu menu;
     private TextView tvLeftMenuCXczhcz;
     private TextView tvLeftMenuDlzt;
+    private TextView tvLeftMenuCGQ;
     private LinearLayout llMain;
     private CGQFra cgq;
     private DLZTFra dlzt;
+    private XCCZFra xccz;
     private FragmentManager manager;
     private FragmentTransaction trans;
 
@@ -36,10 +42,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void setDefaultFragment() {
-        manager = getFragmentManager();
+        manager = getSupportFragmentManager();
         trans = manager.beginTransaction();
         cgq = new CGQFra();
-        trans.replace(R.id.ll_main, cgq);
+        trans.add(R.id.ll_main, cgq);
         trans.commit();
     }
 
@@ -47,8 +53,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         llMain = (LinearLayout) findViewById(R.id.ll_main);
         tvLeftMenuCXczhcz = (TextView) findViewById(R.id.tv_leftmenu_xczhcz);
         tvLeftMenuCXczhcz.setOnClickListener(this);
-        tvLeftMenuDlzt= (TextView) findViewById(R.id.tv_leftmenu_dlzt);
+        tvLeftMenuDlzt = (TextView) findViewById(R.id.tv_leftmenu_dlzt);
         tvLeftMenuDlzt.setOnClickListener(this);
+        tvLeftMenuCGQ = (TextView) findViewById(R.id.tv_leftmenu_cgq);
+        tvLeftMenuCGQ.setOnClickListener(this);
     }
 
     private void setLeftMenu() {
@@ -74,25 +82,42 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         return super.onKeyDown(keyCode, event);
     }
-
+    private void switchFragmentContent(Fragment fragment){
+        List<Fragment> fragments=manager.getFragments();
+        for(Fragment fragment1:fragments){
+            if(fragment1.isVisible()){
+                trans.hide(fragment1);
+            }
+        }
+        if(!fragment.isAdded()){
+            trans.add(R.id.ll_main, fragment).commit();
+        } else {
+            trans.show(fragment).commit();
+        }
+    }
     @Override
     public void onClick(View v) {
-        manager=getFragmentManager();
-        trans=manager.beginTransaction();
+        manager = getSupportFragmentManager();
+        trans = manager.beginTransaction();
         switch (v.getId()) {
             case R.id.tv_leftmenu_xczhcz:
+                if (xccz==null){
+                    xccz=new XCCZFra();
+                }
+                switchFragmentContent(xccz);
+                break;
+            case R.id.tv_leftmenu_cgq:
                 if (cgq == null) {
                     cgq = new CGQFra();
                 }
-                trans.replace(R.id.ll_main, cgq);
+                switchFragmentContent(cgq);
                 break;
             case R.id.tv_leftmenu_dlzt:
                 if (dlzt == null) {
                     dlzt = new DLZTFra();
                 }
-                trans.replace(R.id.ll_main,dlzt);
+                switchFragmentContent(dlzt);
                 break;
         }
-        trans.commit();
     }
 }

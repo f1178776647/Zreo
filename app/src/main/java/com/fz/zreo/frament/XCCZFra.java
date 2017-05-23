@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import com.fz.zreo.R;
 
 /**
- * Created by Zero on 2017/5/22.
+ * Created by Zero on 2017/5/23.
  */
 
-public class DLZTFra extends Fragment {
+public class XCCZFra extends Fragment {
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.daoluzhangtai,container,false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.xccz,container,false);
         return view;
     }
 }
