@@ -119,7 +119,6 @@ public class CGQFra extends Fragment {
                     try {
                         String url = "http://192.168.5.25:8080/transportservice/action/GetSenseByName.do";
                         String requestJson = "{'SenseName':'" + CgqType + "', 'UserName':'Z0004'}";
-                        Log.d("dsad",requestJson);
                         String str = OkManager.getInstance().postSyncHttp(url, requestJson);
                         Message message = handler.obtainMessage();
                         message.obj = str;
@@ -240,5 +239,11 @@ public class CGQFra extends Fragment {
             public TextView tvSfzc;
             public TextView tvTime;
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        isNet=false;
     }
 }

@@ -6,10 +6,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
 import java.util.ArrayList;
@@ -24,9 +25,10 @@ public class NavActivity extends Activity {
     private ViewPager vpNav;
     private View viewBar1;
     private View viewBar2;
-    private List<ImageView> imgs;
-    private int[] imgsId = new int[]{R.drawable.bar1, R.drawable.bar2};
+    private List<View> imgs;
+    private int[] imgsId = new int[]{R.drawable.bar1, R.drawable.bar2/*, R.drawable.bar1*/};
     private NavAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +55,14 @@ public class NavActivity extends Activity {
     }
 
     private void initDatas() {
+        LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
         imgs = new ArrayList<>();
+        View img;
         for (int i = 0; i < imgsId.length; i++) {
-            ImageView img = new ImageView(this);
-            img.setImageResource(imgsId[i]);
+            img = new View(this);
+            img.setLayoutParams(mParams);
+            img.setBackgroundResource(imgsId[i]);
             imgs.add(img);
         }
     }
@@ -101,9 +107,9 @@ public class NavActivity extends Activity {
 
 
     class NavAdapter extends PagerAdapter {
-        private List<ImageView> imgs;
+        private List<View> imgs;
 
-        public NavAdapter(List<ImageView> imgs) {
+        public NavAdapter(List<View> imgs) {
             this.imgs = imgs;
         }
 
@@ -123,10 +129,9 @@ public class NavActivity extends Activity {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            ImageView img = imgs.get(position);
-            container.addView(img);
-            return img;
+        public Object instantiateItem(View container, int position) {
+            ((ViewPager) container).addView(imgs.get(position));
+            return imgs.get(position);
         }
     }
 }

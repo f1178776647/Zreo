@@ -16,20 +16,28 @@
         <EditText
             android:id="@+id/et_user"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/tv_bg"
             android:gravity="center"
             android:hint="请输入用户名"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:padding="5dp"
+            android:textColor="#fff"
+            android:textColorHint="#d2d2d2" />
 
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/tv_bg"
             android:gravity="center"
             android:hint="请输入密码"
             android:inputType="textPassword"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:padding="5dp"
+            android:textColor="#fff"
+            android:textColorHint="#d2d2d2" />
 
 
         <LinearLayout
@@ -65,7 +73,6 @@
                 android:id="@+id/btn_login"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:text="登陆" />
 
@@ -73,6 +80,7 @@
                 android:id="@+id/btn_register"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:text="注册" />
         </LinearLayout>
