@@ -31,7 +31,6 @@ public class OkManager {
     private OkHttpClient mOkHttpClient;
     private static Handler handler;
     private static OkManager okManager;
-    private Context context;
 
     public static OkManager getInstance() {
         if (okManager == null) {
