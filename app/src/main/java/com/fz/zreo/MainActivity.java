@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fz.zreo.frament.CGQFra;
+import com.fz.zreo.frament.DLHJFra;
 import com.fz.zreo.frament.DLZTFra;
 import com.fz.zreo.frament.XCCZFra;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -25,10 +26,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView tvLeftMenuCXczhcz;
     private TextView tvLeftMenuDlzt;
     private TextView tvLeftMenuCGQ;
+    private TextView tvLeftMenuHjjk;
     private LinearLayout llMain;
     private CGQFra cgq;
     private DLZTFra dlzt;
     private XCCZFra xccz;
+    private DLHJFra hjjk;
     private FragmentManager manager;
     private FragmentTransaction trans;
 
@@ -57,6 +60,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         tvLeftMenuDlzt.setOnClickListener(this);
         tvLeftMenuCGQ = (TextView) findViewById(R.id.tv_leftmenu_cgq);
         tvLeftMenuCGQ.setOnClickListener(this);
+        tvLeftMenuHjjk = (TextView) findViewById(R.id.tv_leftmenu_hjjk);
+        tvLeftMenuHjjk.setOnClickListener(this);
     }
 
     private void setLeftMenu() {
@@ -82,29 +87,37 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
         return super.onKeyDown(keyCode, event);
     }
-    private void switchFragmentContent(Fragment fragment){
-        List<Fragment> fragments=manager.getFragments();
-        for(Fragment fragment1:fragments){
-            if(fragment1.isVisible()){
+
+    private void switchFragmentContent(Fragment fragment) {
+        List<Fragment> fragments = manager.getFragments();
+        for (Fragment fragment1 : fragments) {
+            if (fragment1.isVisible()) {
                 trans.hide(fragment1);
             }
         }
-        if(!fragment.isAdded()){
+        if (!fragment.isAdded()) {
             trans.add(R.id.ll_main, fragment).commit();
         } else {
             trans.show(fragment).commit();
         }
     }
+
     @Override
     public void onClick(View v) {
         manager = getSupportFragmentManager();
         trans = manager.beginTransaction();
         switch (v.getId()) {
             case R.id.tv_leftmenu_xczhcz:
-                if (xccz==null){
-                    xccz=new XCCZFra();
+                if (xccz == null) {
+                    xccz = new XCCZFra();
                 }
                 switchFragmentContent(xccz);
+                break;
+            case R.id.tv_leftmenu_hjjk:
+                if (hjjk == null) {
+                    hjjk = new DLHJFra();
+                }
+                switchFragmentContent(hjjk);
                 break;
             case R.id.tv_leftmenu_cgq:
                 if (cgq == null) {
