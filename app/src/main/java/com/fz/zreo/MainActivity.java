@@ -3,9 +3,7 @@ package com.fz.zreo;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -16,14 +14,17 @@ import com.fz.zreo.frament.CGQFra;
 import com.fz.zreo.frament.DLZTFra;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
-import java.util.Date;
-
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private long mExitTime;
     private SlidingMenu menu;
     private TextView tvLeftMenuCXczhcz;
+    private TextView tvLeftMenuDlzt;
     private LinearLayout llMain;
+    private CGQFra cgq;
+    private DLZTFra dlzt;
+    private FragmentManager manager;
+    private FragmentTransaction trans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +32,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         setLeftMenu();
         initView();
-        setFrament();
+        setDefaultFragment();
     }
 
-    private void setFrament() {
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction trans = manager.beginTransaction();
-        trans.add(R.id.ll_main, new CGQFra());
+    private void setDefaultFragment() {
+        manager = getFragmentManager();
+        trans = manager.beginTransaction();
+        cgq = new CGQFra();
+        trans.replace(R.id.ll_main, cgq);
         trans.commit();
     }
 
@@ -45,6 +47,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         llMain = (LinearLayout) findViewById(R.id.ll_main);
         tvLeftMenuCXczhcz = (TextView) findViewById(R.id.tv_leftmenu_xczhcz);
         tvLeftMenuCXczhcz.setOnClickListener(this);
+        tvLeftMenuDlzt= (TextView) findViewById(R.id.tv_leftmenu_dlzt);
+        tvLeftMenuDlzt.setOnClickListener(this);
     }
 
     private void setLeftMenu() {
@@ -73,11 +77,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        manager=getFragmentManager();
+        trans=manager.beginTransaction();
         switch (v.getId()) {
             case R.id.tv_leftmenu_xczhcz:
-                //Toast.makeText(this,tvLeftMenuCXczhcz.getText().toString(),Toast.LENGTH_LONG).show();
-
+                if (cgq == null) {
+                    cgq = new CGQFra();
+                }
+                trans.replace(R.id.ll_main, cgq);
+                break;
+            case R.id.tv_leftmenu_dlzt:
+                if (dlzt == null) {
+                    dlzt = new DLZTFra();
+                }
+                trans.replace(R.id.ll_main,dlzt);
                 break;
         }
+        trans.commit();
     }
 }
