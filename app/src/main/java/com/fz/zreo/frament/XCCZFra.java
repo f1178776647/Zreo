@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.fz.zreo.R;
+import com.fz.zreo.XcczActivity;
 import com.fz.zreo.bean.XcyeCx;
 import com.fz.zreo.utils.MyApplication;
 import com.fz.zreo.utils.MyVolley;
@@ -32,7 +33,7 @@ import java.util.TreeMap;
  * Created by Zero on 2017/5/23.
  */
 
-public class XCCZFra extends Fragment implements View.OnClickListener {
+public class XCCZFra extends Fragment implements View.OnClickListener,VolleyResponse {
     public static int CHONGZHI = 100;
     public static int CAXUN = 200;
     private Button btnCaxun;
@@ -46,10 +47,11 @@ public class XCCZFra extends Fragment implements View.OnClickListener {
     private String cxCarId;
     private String czCarId;
     private String czMoney;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.xccz,container,false);
+        View view = inflater.inflate(R.layout.xccz, container, false);
         initData();
         initView(view);
         setData();
@@ -66,6 +68,7 @@ public class XCCZFra extends Fragment implements View.OnClickListener {
         tvCxye = (TextView) view.findViewById(R.id.tv_xccz_cxye);
         volley = new MyVolley();
     }
+
     private void setData() {
         ArrayAdapter cxAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, adapters);
         spnCxzh.setAdapter(cxAdapter);
@@ -119,19 +122,7 @@ public class XCCZFra extends Fragment implements View.OnClickListener {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                volley.postJsonByJson(new VolleyResponse() {
-                    @Override
-                    public void onSuccessResponseJson(JSONObject jsonObject, int type) {
-                        Gson gson = new Gson();
-                        XcyeCx cx = gson.fromJson(jsonObject.toString(), XcyeCx.class);
-                        tvCxye.setText("账户余额：" + cx.getBalance() + "元");
-                    }
-
-                    @Override
-                    public void onFailResponseJson(VolleyError error) {
-
-                    }
-                }, url, json, CAXUN);
+                volley.postJsonByJson(XCCZFra.this, url, json, CAXUN);
                 break;
             case R.id.btn_xccz_cz:
                 url = "http://192.168.5.25:8080/transportservice/action/SetCarAccountRecharge.do";
@@ -141,37 +132,30 @@ public class XCCZFra extends Fragment implements View.OnClickListener {
                 map.put("Money", czMoney);
                 map.put("UserName", "Z0004");
                 json = new JSONObject(map);
-                volley.postJsonByJson(new VolleyResponse() {
-                    @Override
-                    public void onSuccessResponseJson(JSONObject jsonObject, int type) {
-                        Gson gson = new Gson();
-                        XcyeCx cx = gson.fromJson(jsonObject.toString(), XcyeCx.class);
-                        Toast.makeText(getActivity(), "充值" + cx.getERRMSG().toString(), Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onFailResponseJson(VolleyError error) {
-                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }, url, json, CHONGZHI);
+                volley.postJsonByJson(XCCZFra.this, url, json, CHONGZHI);
                 break;
         }
     }
-
-    /*@Override
-    public void onSuccessResponseJson(JSONObject jsonObject, int type) {
-        Gson gson = new Gson();
-        XcyeCx cx = gson.fromJson(jsonObject.toString(), XcyeCx.class);
-        if (type == CHONGZHI) {
-            Toast.makeText(XcczActivity.this, "充值" + cx.getERRMSG().toString(), Toast.LENGTH_LONG).show();
-        } else {
-            tvCxye.setText("账户余额：" + cx.getBalance() + "元");
-        }
-    }*/
 
     @Override
     public void onStop() {
         super.onStop();
         MyApplication.getRequestQueue().cancelAll("postJson");
+    }
+
+    @Override
+    public void onSuccessResponseJson(JSONObject jsonObject, int type) {
+        Gson gson = new Gson();
+        XcyeCx cx = gson.fromJson(jsonObject.toString(), XcyeCx.class);
+        if (type == CHONGZHI) {
+            Toast.makeText(getActivity(), "充值" + cx.getERRMSG().toString(), Toast.LENGTH_LONG).show();
+        } else {
+            tvCxye.setText("账户余额：" + cx.getBalance() + "元");
+        }
+    }
+
+    @Override
+    public void onFailResponseJson(VolleyError error) {
+
     }
 }

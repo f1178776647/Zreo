@@ -1,10 +1,13 @@
 package com.fz.zreo.bean;
 
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Created by Zero on 2017/5/20.
  */
-
+@DatabaseTable(tableName = DaoLu.TABLE_NAME)
 public class DaoLu {
+    public static final String TABLE_NAME="_daolu";
     /**
      * ERRMSG : 成功
      * Balance : 3
