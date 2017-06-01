@@ -72,7 +72,7 @@ public class TubiaoActivity extends Activity {
         LineDataSet dataSet1 = new LineDataSet(yValue, null);
         dataSet1.setColor(Color.RED);
         dataSet1.setCircleColor(Color.RED);
-        dataSet1.setDrawValues(false);
+//        dataSet1.setDrawValues(false);
 
         LineDataSet dataSet2 = new LineDataSet(yValue2, null);
         dataSet2.setColor(Color.YELLOW);
@@ -81,7 +81,7 @@ public class TubiaoActivity extends Activity {
 
         ArrayList<LineDataSet> dataSets = new ArrayList<>();
         dataSets.add(dataSet1);
-        dataSets.add(dataSet2);
+        //dataSets.add(dataSet2);
         LineData lineData = new LineData(xValues, dataSets);
         mLineChart.setData(lineData);
         mLineChart.animateY(2000, Easing.EasingOption.Linear);
@@ -100,6 +100,11 @@ public class TubiaoActivity extends Activity {
         mLineChart.setVisibleXRangeMaximum(16);
         if(set.getEntryCount()>12){
             data.addXValue((data.getXValCount()) + "");
+        }
+        if(f>10){
+            set.setValueTextColor(Color.RED);
+        }else {
+            set.setValueTextColor(Color.BLACK);
         }
         mLineChart.moveViewToX(data.getXValCount() - 1);
     }

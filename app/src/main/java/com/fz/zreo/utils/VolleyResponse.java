@@ -9,7 +9,7 @@ import org.json.JSONObject;
  */
 
 public interface VolleyResponse {
-    public void onSuccessResponseJson(JSONObject jsonObject,int type);
+    void onSuccessResponseJson(JSONObject jsonObject, int type);
 
-    public void onFailResponseJson(VolleyError error);
+    void onFailResponseJson(VolleyError error);
 }

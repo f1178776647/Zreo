@@ -121,7 +121,7 @@ public class DaoLuZhanTaiActivity extends Activity {
             DaoLu daolu = gson.fromJson(result, DaoLu.class);
             int position = msg.what;
             int index = position - 1;
-            Log.e("json", result + position + ":" + index);
+//            Log.e("json", result + position + ":" + index);
             maps[1][index] = position;
             maps[0][index] = daolu.getBalance();
             for (int i = 0; i < maps[0].length - 1; i++) {

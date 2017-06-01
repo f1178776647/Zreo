@@ -36,3 +36,6 @@ dependencies {
     compile files('libs/MPAndroidChart-v2.1.5.jar')
     compile files('libs/mockito-core-1.9.5.jar')
 }
+repositories {
+    mavenCentral()
+}
