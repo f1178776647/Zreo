@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.fz.zreo.R;
 import com.fz.zreo.bean.DaoLu;
+import com.fz.zreo.utils.MyVolley;
 import com.fz.zreo.utils.OkManager;
 import com.google.gson.Gson;
 
@@ -99,7 +100,7 @@ public class DLZTFra extends Fragment {
             @Override
             public void run() {
                 super.run();
-                String url = "http://192.168.5.25:8080/transportservice/action/GetRoadStatus.do";
+                String url = MyVolley.URL+"GetRoadStatus.do";
                 for (int i = 1; i < 6; i++) {
                     String requestJson = "{'RoadId':" + i + ",'UserName':'Z0004'}";
                     String str = OkManager.getInstance().postSyncHttp(url, requestJson);

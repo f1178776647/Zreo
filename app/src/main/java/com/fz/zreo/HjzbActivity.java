@@ -53,7 +53,7 @@ public class HjzbActivity extends Activity implements WebResponse, VolleyRespons
                     super.run();
                     while (true) {
                         MyApplication.getRequestQueue().cancelAll("postJson");
-                        volley.postJsonByJson(HjzbActivity.this, url, jsonObject, 100);
+                        volley.postHttpByJson(HjzbActivity.this, url, jsonObject, 100);
                         try {
                             sleep(1000);
                         } catch (InterruptedException e) {

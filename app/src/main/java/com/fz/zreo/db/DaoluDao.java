@@ -13,6 +13,7 @@ import java.sql.SQLException;
  */
 
 public class DaoluDao extends BaseDao {
+
     public DaoluDao(Context context) {
         super(context);
     }

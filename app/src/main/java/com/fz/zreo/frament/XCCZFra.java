@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.fz.zreo.R;
-import com.fz.zreo.XcczActivity;
 import com.fz.zreo.bean.XcyeCx;
 import com.fz.zreo.utils.MyApplication;
 import com.fz.zreo.utils.MyVolley;
@@ -33,7 +32,7 @@ import java.util.TreeMap;
  * Created by Zero on 2017/5/23.
  */
 
-public class XCCZFra extends Fragment implements View.OnClickListener,VolleyResponse {
+public class XCCZFra extends Fragment implements View.OnClickListener, VolleyResponse {
     public static int CHONGZHI = 100;
     public static int CAXUN = 200;
     private Button btnCaxun;
@@ -116,23 +115,23 @@ public class XCCZFra extends Fragment implements View.OnClickListener,VolleyResp
         JSONObject json = null;
         switch (v.getId()) {
             case R.id.btn_xccz_caxun:
-                url = "http://192.168.5.25:8080/transportservice/action/GetCarAccountBalance.do";
+                url = MyVolley.URL + "GetCarAccountBalance.do";
                 try {
                     json = new JSONObject("{'CarId':" + cxCarId + ",'UserName':'Z0004'}");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                volley.postJsonByJson(XCCZFra.this, url, json, CAXUN);
+                volley.postHttpByJson(XCCZFra.this, url, json, CAXUN);
                 break;
             case R.id.btn_xccz_cz:
-                url = "http://192.168.5.25:8080/transportservice/action/SetCarAccountRecharge.do";
+                url = MyVolley.URL + "SetCarAccountRecharge.do";
                 map = new TreeMap<>();
                 czMoney = etCzye.getText().toString();
                 map.put("CarId", czCarId);
                 map.put("Money", czMoney);
                 map.put("UserName", "Z0004");
                 json = new JSONObject(map);
-                volley.postJsonByJson(XCCZFra.this, url, json, CHONGZHI);
+                volley.postHttpByJson(XCCZFra.this, url, json, CHONGZHI);
                 break;
         }
     }

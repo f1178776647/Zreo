@@ -91,29 +91,34 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         manager = getSupportFragmentManager();
         trans = manager.beginTransaction();
+
         switch (v.getId()) {
             case R.id.tv_leftmenu_xczhcz:
                 if (xccz == null) {
                     xccz = new XCCZFra();
                 }
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 switchFragmentContent(xccz);
                 break;
             case R.id.tv_leftmenu_hjjk:
                 if (hjjk == null) {
                     hjjk = new DLHJFra();
                 }
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 switchFragmentContent(hjjk);
                 break;
             case R.id.tv_leftmenu_cgq:
                 if (cgq == null) {
                     cgq = new CGQFra();
                 }
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 switchFragmentContent(cgq);
                 break;
             case R.id.tv_leftmenu_dlzt:
                 if (dlzt == null) {
                     dlzt = new DLZTFra();
                 }
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 switchFragmentContent(dlzt);
                 break;
         }

@@ -59,7 +59,7 @@ public class DLHJFra extends Fragment implements WebResponse {
     }
 
     private void setData() {
-        final String url = "http://192.168.5.25:8080/transportservice/action/GetAllSense.do";
+        final String url = MyVolley.URL+"GetAllSense.do";
         final String requestJson = "{'UserName':'Z0004'}";
         try {
             final JSONObject jsonObject = new JSONObject(requestJson);
@@ -69,7 +69,7 @@ public class DLHJFra extends Fragment implements WebResponse {
                     super.run();
                     while (true) {
                         MyApplication.getRequestQueue().cancelAll("postJson");
-                        volley.postJsonByJson(new VolleyResponse() {
+                        volley.postHttpByJson(new VolleyResponse() {
                             @Override
                             public void onSuccessResponseJson(JSONObject jsonObject, int type) {
                                 setViewData(jsonObject.toString());

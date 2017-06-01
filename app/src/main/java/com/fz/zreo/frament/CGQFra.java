@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.fz.zreo.R;
 import com.fz.zreo.bean.Hjzb;
+import com.fz.zreo.utils.MyVolley;
 import com.fz.zreo.utils.OkManager;
 import com.google.gson.Gson;
 
@@ -117,7 +118,7 @@ public class CGQFra extends Fragment {
                 super.run();
                 while (isNet) {
                     try {
-                        String url = "http://192.168.5.25:8080/transportservice/action/GetSenseByName.do";
+                        String url = MyVolley.URL+"GetSenseByName.do";
                         String requestJson = "{'SenseName':'" + CgqType + "', 'UserName':'Z0004'}";
                         String str = OkManager.getInstance().postSyncHttp(url, requestJson);
                         Message message = handler.obtainMessage();

@@ -60,14 +60,6 @@ public class TubiaoActivity extends Activity {
             xValues.add("" + i);
         }
         final ArrayList<Entry> yValue = new ArrayList<>();
-        /*yValue.add(new Entry(13, 1));
-        yValue.add(new Entry(6, 2));
-        yValue.add(new Entry(3, 3));
-        yValue.add(new Entry(7, 4));
-        yValue.add(new Entry(2, 5));
-        yValue.add(new Entry(5, 6));
-        yValue.add(new Entry(12, 7));
-        yValue.add(new Entry(-1, 8));*/
         ArrayList<Entry> yValue2 = new ArrayList<>();
         yValue2.add(new Entry(8, 1));
         yValue2.add(new Entry(9, 2));
@@ -103,7 +95,6 @@ public class TubiaoActivity extends Activity {
         LineDataSet set = data.getDataSetByIndex(0);
         float f = (float) ((Math.random()) * 20);
         Entry entry = new Entry(f, set.getEntryCount()+1);
-        Log.d("SDAD",set.getEntryCount()+"");
         data.addEntry(entry, 0);
         mLineChart.notifyDataSetChanged();
         mLineChart.setVisibleXRangeMaximum(16);

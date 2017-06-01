@@ -118,7 +118,7 @@ public class XcczActivity extends Activity implements View.OnClickListener, Voll
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                volley.postJsonByJson(XcczActivity.this, url, json, CAXUN);
+                volley.postHttpByJson(XcczActivity.this, url, json, CAXUN);
                 break;
             case R.id.btn_xccz_cz:
                 url = "http://192.168.5.25:8080/transportservice/action/SetCarAccountRecharge.do";
@@ -128,7 +128,7 @@ public class XcczActivity extends Activity implements View.OnClickListener, Voll
                 map.put("Money", czMoney);
                 map.put("UserName", "Z0004");
                 json = new JSONObject(map);
-                volley.postJsonByJson(XcczActivity.this, url, json, CHONGZHI);
+                volley.postHttpByJson(XcczActivity.this, url, json, CHONGZHI);
                 break;
         }
     }
